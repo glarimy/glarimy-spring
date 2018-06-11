@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName">
+
+	<bean id="common" abstract="true">
+		<property name="university" value="Andhra University" />
+	</bean>
+
+	<bean id="employee" class="com.glarimy.Employee" autowire="byType">
+		<property name="id" value="22061971" />
+		<property name="name" value="Krishna Mohan Koyya" />
+		<property name="salary" value="100000.00" />
+		<property name="regular" value="true" />
+	</bean>
+
+	<bean class="com.glarimy.Address" autowire-candidate="false">
+		<constructor-arg index="0" value="Pai Layout" />
+		<constructor-arg name="city" value="Bengaluru" />
+		<constructor-arg type="int" value='560016' />
+	</bean>
+
+	<bean id="qualifications" class="java.util.HashSet">
+		<constructor-arg>
+			<set>
+				<bean class="com.glarimy.Qualification" parent="common">
+					<property name="degree" value="BE" />
+				</bean>
+
+				<bean class="com.glarimy.Qualification" p:degree="M.Tech"
+					parent="common" />
+
+				<bean class="com.glarimy.Qualification" c:degree="PMP"
+					c:university="PMI" />
+			</set>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="role" class="com.glarimy.Employee$Role">
+		<property name="designation" value="Principal Consultant" />
+	</bean>
+</beans>

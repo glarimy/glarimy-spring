@@ -1,0 +1,8 @@
+/Users/glarimy/Professional/Workspace/Glarimy-Spring-Core/glarimy-spring-core-09/src/main/java/com/glarimy/directory/exceptions/InvalidEntryException.java
+/Users/glarimy/Professional/Workspace/Glarimy-Spring-Core/glarimy-spring-core-09/src/main/java/com/glarimy/directory/service/SimpleDirectory.java
+/Users/glarimy/Professional/Workspace/Glarimy-Spring-Core/glarimy-spring-core-09/src/main/java/com/glarimy/directory/domain/Contact.java
+/Users/glarimy/Professional/Workspace/Glarimy-Spring-Core/glarimy-spring-core-09/src/main/java/com/glarimy/directory/exceptions/EntryNotFoundException.java
+/Users/glarimy/Professional/Workspace/Glarimy-Spring-Core/glarimy-spring-core-09/src/main/java/com/glarimy/directory/data/InMemoryCRUDRepository.java
+/Users/glarimy/Professional/Workspace/Glarimy-Spring-Core/glarimy-spring-core-09/src/main/java/com/glarimy/directory/api/Directory.java
+/Users/glarimy/Professional/Workspace/Glarimy-Spring-Core/glarimy-spring-core-09/src/main/java/com/glarimy/directory/data/CRUDRepository.java
+/Users/glarimy/Professional/Workspace/Glarimy-Spring-Core/glarimy-spring-core-09/src/main/java/com/glarimy/directory/exceptions/DirectoryException.java

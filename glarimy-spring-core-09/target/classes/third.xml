@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd">
+	<import resource="address.xml" />
+	<import resource="qualifications.xml" />
+
+	<bean id="employee" class="com.glarimy.Employee">
+		<property name="id" value="22061971" />
+		<property name="name" value="Krishna Mohan Koyya" />
+		<property name="salary" value="100000.00" />
+		<property name="regular" value="true" />
+		<property name="address" ref="address" />
+		<property name="qualifications">
+			<set>
+				<ref bean="be" />
+				<ref bean="mtech" />
+				<ref bean="pmp" />
+			</set>
+		</property>
+	</bean>
+
+</beans>
