@@ -5,7 +5,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context 
-	http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byType">
+	http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byType">
 
 	<bean id="library" class="com.glarimy.library.service.LibraryImpl" />
 
@@ -21,10 +22,12 @@
 	</bean>
 
 	<bean id="autoProxyCreator"
-	class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
 		<property name="proxyTargetClass" value="true" />
 		<property name="beanNames">
-			<list><value>library</value></list>
+			<list>
+				<value>library</value>
+			</list>
 		</property>
 		<property name="interceptorNames">
 			<list>
@@ -32,8 +35,10 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="store" class="com.glarimy.library.data.LibraryStore" />
+	<!-- <bean id="template" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate"/> -->
+	<!-- <bean id="template" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"/> -->
 	<bean id="ds"
 		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />

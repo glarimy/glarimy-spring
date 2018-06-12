@@ -18,6 +18,7 @@ public class LibraryConsole {
 		} catch (BookNotFoundExcetion bnfe) {
 			System.out.println("Sorry ... not found!");
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Internal error!");
 		}
 	}
