@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="libraryservice" class="com.glarimy.library.service.LibraryImpl" />
+
+	<bean id="advice" class="com.glarimy.library.aspects.LoggingInterceptor" />
+
+	<bean id="pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+		<property name="pattern" value=".*find" />
+	</bean>
+
+	<bean id="advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="advice" />
+		<property name="pointcut" ref="pointcut" />
+	</bean>
+	<bean id="library" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="libraryservice" />
+		<property name="interceptorNames">
+			<list>
+				<value>advisor</value>
+			</list>
+		</property>
+		<property name="proxyInterfaces" value="com.glarimy.library.api.Library" />
+	</bean>
+</beans>
