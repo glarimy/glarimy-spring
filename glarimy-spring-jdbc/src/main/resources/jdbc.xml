@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byType">
+
+	<bean id="library" class="com.glarimy.library.service.LibraryImpl" />
+
+	<bean id="advice" class="com.glarimy.library.aspects.LoggingAdvice" />
+
+	<bean id="pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+		<property name="pattern" value="com.glarimy.library.service.*" />
+	</bean>
+
+	<bean id="advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="advice" />
+		<property name="pointcut" ref="pointcut" />
+	</bean>
+
+	<bean id="autoProxyCreator"
+	class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="proxyTargetClass" value="true" />
+		<property name="beanNames">
+			<list><value>library</value></list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>advisor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="store" class="com.glarimy.library.data.LibraryStore" />
+	<bean id="ds"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/spring" />
+		<property name="username" value="root" />
+		<property name="password" value="admin" />
+	</bean>
+</beans>
