@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byType">
+
+	<bean id='accounts' class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="1234" value-ref="account" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="account" class="com.glarimy.bank.api.model.Account"
+		p:number='1234' p:balance='600'>
+	</bean>
+
+	<bean class='com.glarimy.bank.api.model.Customer' p:name='Krishna'
+		p:phoneNumber="9731423166" />
+
+	<bean class='com.glarimy.bank.api.model.Address' p:location="Old Madras Road"
+		p:city="Bengaluru" p:pincode='560016' />
+
+	<bean class='java.util.ArrayList'>
+		<constructor-arg>
+			<list>
+				<bean class='com.glarimy.bank.api.model.Transaction' p:type='credit'
+					p:amount='100' p:balance='100' />
+				<bean class='com.glarimy.bank.api.model.Transaction' p:type='credit'
+					p:amount='100' p:balance='200' />
+				<bean class='com.glarimy.bank.api.model.Transaction' p:type='credit'
+					p:amount='100' p:balance='300' />
+				<bean class='com.glarimy.bank.api.model.Transaction' p:type='credit'
+					p:amount='100' p:balance='400' />
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean class='java.util.Date' />
+</beans>
