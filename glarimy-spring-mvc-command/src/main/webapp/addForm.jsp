@@ -17,7 +17,7 @@
 	<hr />
 	<br />
 	<h2>Add New Book</h2>
-	<f:form action="add" method="POST">
+	<f:form action="add" method="POST" modelAttribute="book">
 		<table>
 			<tr>
 				<td><spring:message code="glarimy.isbn" /></td>

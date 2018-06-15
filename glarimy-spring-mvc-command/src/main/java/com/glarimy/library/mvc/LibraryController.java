@@ -2,6 +2,7 @@ package com.glarimy.library.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,13 +20,18 @@ public class LibraryController {
 	Library library;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
+
 	public ModelAndView add() {
-		return new ModelAndView("addForm", "command", new Book());
+		return new ModelAndView("addForm", "book", new Book());
+	}
+
+	public String add(Model model) {
+		model.addAttribute("book", new Book());
+		return "addForm";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(@ModelAttribute Book book,
-			BindingResult bindingResult, ModelMap model) {
+	public String add(@ModelAttribute Book book, BindingResult bindingResult, ModelMap model) {
 		try {
 			if (bindingResult.hasErrors()) {
 				System.out.println("Errors");
