@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/data/jpa 
+	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.glarimy.spring" />
+	<jpa:repositories base-package="com.glarimy.spring" />
+	<tx:annotation-driven />
+	<aop:aspectj-autoproxy />
+	<bean id='item' abstract="true">
+		<property name="price" value='100.00' />
+		<property name="reference" value='true' />
+	</bean>
+	<bean id='java' class="com.glarimy.spring.api.Book" parent="item"
+		autowire="byType">
+		<property name="isbn" value='23101987' />
+		<property name="title" value='A Quick Look at Java' />
+	</bean>
+	<bean id='spring' class="com.glarimy.spring.api.TextBook" parent="item">
+		<property name="isbn" value='22071972' />
+		<property name="title" value='Spring Framework' />
+		<property name="price" value='250.00' />
+		<property name="course" value="Technology"></property>
+		<property name="authors" ref='authors' />
+	</bean>
+	<bean id='mvc' class="com.glarimy.spring.api.Book" autowire="byType">
+		<property name="isbn" value='22061971' />
+		<property name="reference" value='false' />
+	</bean>
+	<bean id='authors' class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.glarimy.spring.api.Person">
+					<property name='name' value='Krishna' />
+					<property name="phoneNumber" value='9731423166' />
+				</bean>
+				<bean class="com.glarimy.spring.api.Person">
+					<property name='name' value='Mohan' />
+					<property name="phoneNumber" value='9731423166' />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="com.mysql.jdbc.Driver" p:url="jdbc:mysql://localhost/glarimy"
+		p:username="root" p:password="admin" p:initialSize="5" p:maxActive="10">
+	</bean>
+</beans>
